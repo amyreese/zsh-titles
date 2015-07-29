@@ -14,10 +14,10 @@ function update_title() {
 
 # called just before the prompt is printed
 function precmd() {
-  update_title "zsh" "%55<...<%~"
+  update_title "zsh" "%20<...<%~"
 }
 
 # called just before a command is executed
 function preexec() {
-  update_title "$1" "%55<...<%~"
+  update_title "$1" "%20<...<%~"
 }
