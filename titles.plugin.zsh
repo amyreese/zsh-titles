@@ -19,5 +19,12 @@ function precmd() {
 
 # called just before a command is executed
 function preexec() {
-  update_title "$1" "%20<...<%~"
+  local -a cmd; cmd=(${(z)1})             # Re-parse the command line
+
+  # Construct a command that will output the desired job number.
+  case $cmd[1] in
+    fg)	cmd="${(z)jobtexts[${(Q)cmd[2]:-%+}]}" ;;
+    %*)	cmd="${(z)jobtexts[${(Q)cmd[1]:-%+}]}" ;;
+  esac
+  update_title "$cmd" "%20<...<%~"
 }
