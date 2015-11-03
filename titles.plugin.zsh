@@ -4,11 +4,13 @@
 # Update terminal/tmux window titles based on location/command
 
 function update_title() {
-  if [ -n "$TMUX" ]; then
-    # escape '%' in $1, make nonprintables visible
-    a=${(V)1//\%/\%\%}
-    a=$(print -Pn "%20>...>$a" | tr -d "\n")
+  # escape '%' in $1, make nonprintables visible
+  a=${(V)1//\%/\%\%}
+  a=$(print -Pn "%20>...>$a" | tr -d "\n")
+  if [[ -n "$TMUX" ]]; then
     print -Pn "\ek$a:$2\e\\"
+  elif [[ "$TERM" =~ "xterm*" ]]; then
+    print -Pn "\e]0;$a:$2\a"
   fi
 }
 
