@@ -28,7 +28,7 @@ function _zsh_title__preexec() {
     fg)	cmd="${(z)jobtexts[${(Q)cmd[2]:-%+}]}" ;;
     %*)	cmd="${(z)jobtexts[${(Q)cmd[1]:-%+}]}" ;;
   esac
-  update_title "$cmd" "%20<...<%~"
+  update_title "$cmd" "%20<...<%~">/dev/null
 }
 
 autoload -Uz add-zsh-hook
