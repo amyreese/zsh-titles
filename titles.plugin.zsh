@@ -6,7 +6,7 @@
 function update_title() {
   # escape '%' in $1, make nonprintables visible
   a=${(V)1//\%/\%\%}
-  a=$(print -Pn "%20>...>$a" | tr -d "\n")
+  a=$(print -n "%20>...>$a" | tr -d "\n")
   if [[ -n "$TMUX" ]]; then
     print -Pn "\ek$a:$2\e\\"
   elif [[ "$TERM" =~ "xterm*" ]]; then
@@ -28,7 +28,7 @@ function _zsh_title__preexec() {
     fg)	cmd="${(z)jobtexts[${(Q)cmd[2]:-%+}]}" ;;
     %*)	cmd="${(z)jobtexts[${(Q)cmd[1]:-%+}]}" ;;
   esac
-  update_title "$cmd" "%20<...<%~">/dev/null
+  update_title "$cmd" "%20<...<%~"
 }
 
 autoload -Uz add-zsh-hook
