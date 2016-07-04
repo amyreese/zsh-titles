@@ -6,7 +6,7 @@
 function update_title() {
   # escape '%' in $1, make nonprintables visible
   a=${(V)1//\%/\%\%}
-  a=$(print -Pn "%20>...>$a" | tr -d "\n")
+  a=$(print -n "%20>...>$a" | tr -d "\n")
   if [[ -n "$TMUX" ]]; then
     print -Pn "\ek$a:$2\e\\"
   elif [[ "$TERM" =~ "xterm*" ]]; then
