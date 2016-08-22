@@ -4,6 +4,7 @@
 # Update terminal/tmux window titles based on location/command
 
 function update_title() {
+  local a
   # escape '%' in $1, make nonprintables visible
   a=${(V)1//\%/\%\%}
   a=$(print -n "%20>...>$a" | tr -d "\n")
