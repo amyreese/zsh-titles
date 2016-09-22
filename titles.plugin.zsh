@@ -9,9 +9,9 @@ function update_title() {
   a=${(V)1//\%/\%\%}
   a=$(print -n "%20>...>$a" | tr -d "\n")
   if [[ -n "$TMUX" ]]; then
-    print -Pn "\ek$a:$2\e\\"
+    print -n "\ek${(%)a}:${(%)2}\e\\"
   elif [[ "$TERM" =~ "xterm*" ]]; then
-    print -Pn "\e]0;$a:$2\a"
+    print -n "\e]0;${(%)a}:${(%)2}\a"
   fi
 }
 
