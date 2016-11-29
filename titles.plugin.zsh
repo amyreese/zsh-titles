@@ -10,6 +10,8 @@ function update_title() {
   a=$(print -n "%20>...>$a" | tr -d "\n")
   if [[ -n "$TMUX" ]]; then
     print -n "\ek${(%)a}:${(%)2}\e\\"
+  elif [[ "$TERM" =~ "screen*" ]]; then
+    print -n "\ek${(%)a}:${(%)2}\e\\"
   elif [[ "$TERM" =~ "xterm*" ]]; then
     print -n "\e]0;${(%)a}:${(%)2}\a"
   fi
