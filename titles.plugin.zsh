@@ -4,24 +4,21 @@
 # Update terminal/tmux window titles based on location/command
 
 function update_title() {
-  local a
   # escape '%' in $1, make nonprintables visible
-  a=${(V)1//\%/\%\%}
-  a=$(print -n "%20>...>$a")
   # remove newlines
-  a=${a//$'\n'/}
   if [[ -n "$TMUX" ]]; then
-    print -n "\ek${(%)a}:${(%)2}\e\\"
+    print -n "\ek${(%)1}\e\\"
   elif [[ "$TERM" =~ "screen*" ]]; then
-    print -n "\ek${(%)a}:${(%)2}\e\\"
+    print -n "\ek${(%)1}\e\\"
   elif [[ "$TERM" =~ "xterm*" ]]; then
-    print -n "\e]0;${(%)a}:${(%)2}\a"
+    print -n "\e]0;${(%)1}\a"
   fi
 }
 
 # called just before the prompt is printed
 function _zsh_title__precmd() {
-  update_title "zsh" "%20<...<%~"
+  #update_title "zsh" "%20<...<%~"
+  update_title "%m : %20<...<%~"
 }
 
 # called just before a command is executed
