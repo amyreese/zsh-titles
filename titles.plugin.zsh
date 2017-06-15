@@ -11,11 +11,11 @@ function update_title() {
   # remove newlines
   a=${a//$'\n'/}
   if [[ -n "$TMUX" ]]; then
-    printf "\ek${(%)1}\e\\"
+    print -n "\ek${(%)a}:${(%)2}\e\\"
   elif [[ "$TERM" =~ "screen*" ]]; then
-    printf "\ek${(%)1}\e\\"
+    print -n "\ek${(%)a}:${(%)2}\e\\"
   elif [[ "$TERM" =~ "xterm*" ]]; then
-    printf "\e]0;${(%)1}\a"
+    print -n "\e]0;${(%)a}:${(%)2}\a"
   elif [[ "$TERM" =~ "^rxvt-unicode.*" ]]; then
     printf '\33]2;%s:%s\007' ${(%)a} ${(%)2}
   fi
@@ -23,12 +23,17 @@ function update_title() {
 
 # called just before the prompt is printed
 function _zsh_title__precmd() {
-  update_title "%m : %20<...<%~"
+  update_title "zsh" "%20<...<%~"
 }
 
 # called just before a command is executed
 function _zsh_title__preexec() {
-  local -a cmd; cmd=(${(z)1})             # Re-parse the command line
+  local -a cmd
+  
+  # Escape '\'
+  1=${1//\\/\\\\\\\\}
+
+  cmd=(${(z)1})             # Re-parse the command line
 
   # Construct a command that will output the desired job number.
   case $cmd[1] in
