@@ -28,7 +28,12 @@ function _zsh_title__precmd() {
 
 # called just before a command is executed
 function _zsh_title__preexec() {
-  local -a cmd; cmd=(${(z)1})             # Re-parse the command line
+  local -a cmd
+  
+  # Escape '\'
+  1=${1//\\/\\\\\\\\}
+
+  cmd=(${(z)1})             # Re-parse the command line
 
   # Construct a command that will output the desired job number.
   case $cmd[1] in
