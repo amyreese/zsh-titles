@@ -11,11 +11,11 @@ function update_title() {
   # remove newlines
   a=${a//$'\n'/}
   if [[ -n "$TMUX" ]]; then
-    printf "\ek${(%)a}:${(%)2}\e\\"
+    printf "\ek${(%)1}\e\\"
   elif [[ "$TERM" =~ "screen*" ]]; then
-    printf "\ek${(%)a}:${(%)2}\e\\"
+    printf "\ek${(%)1}\e\\"
   elif [[ "$TERM" =~ "xterm*" ]]; then
-    printf "\e]0;${(%)a}:${(%)2}\a"
+    printf "\e]0;${(%)1}\a"
   elif [[ "$TERM" =~ "^rxvt-unicode.*" ]]; then
     printf '\33]2;%s:%s\007' ${(%)a} ${(%)2}
   fi
@@ -23,7 +23,7 @@ function update_title() {
 
 # called just before the prompt is printed
 function _zsh_title__precmd() {
-  update_title "zsh" "%20<...<%~"
+  update_title "%m : %20<...<%~"
 }
 
 # called just before a command is executed
