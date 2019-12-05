@@ -10,7 +10,7 @@ function update_title() {
   a=$(print -n "%20>...>$a")
   # remove newlines
   a=${a//$'\n'/}
-  if [[ -n "$TMUX" ]]; then
+  if [[ -n "$TMUX" ]] && [[ $TERM == screen* ]]; then
     print -n "\ek${(%)a}:${(%)2}\e\\"
   elif [[ "$TERM" =~ "screen*" ]]; then
     print -n "\ek${(%)a}:${(%)2}\e\\"
