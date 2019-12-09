@@ -7,7 +7,8 @@ function update_title() {
   local a
   # escape '%' in $1, make nonprintables visible
   a=${(V)1//\%/\%\%}
-  a=$(print -n "%20>...>$a")
+  print -nz "%20>...>$a"
+  read -rz a
   # remove newlines
   a=${a//$'\n'/}
   if [[ -n "$TMUX" ]] && [[ $TERM == screen* || $TERM == tmux* ]]; then
