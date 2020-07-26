@@ -15,7 +15,7 @@ function update_title() {
     print -n "\ek${(%)a}:${(%)2}\e\\"
   elif [[ "$TERM" =~ "screen*" ]]; then
     print -n "\ek${(%)a}:${(%)2}\e\\"
-  elif [[ "$TERM" =~ "xterm*" ]]; then
+  elif [[ "$TERM" = "alacritty" || "$TERM" =~ "xterm*" ]]; then
     print -n "\e]0;${(%)a}:${(%)2}\a"
   elif [[ "$TERM" =~ "^rxvt-unicode.*" ]]; then
     printf '\33]2;%s:%s\007' ${(%)a} ${(%)2}
