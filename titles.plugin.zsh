@@ -1,4 +1,4 @@
-# Copyright 2015 John Reese
+# Copyright 2022 Amethyst Reese
 # Licensed under the MIT license
 #
 # Update terminal/tmux window titles based on location/command
